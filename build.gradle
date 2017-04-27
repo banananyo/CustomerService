@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE')
 	}
 }
 
@@ -14,9 +15,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
+
+mainClassName = "com.springboot.customerservice.CustomerServiceApplication"
+applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
 
 jar {
-	baseName = 'eureka-client'
+	baseName = 'customer-client'
 	version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -24,6 +30,7 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "http://repo.spring.io/libs-milestone" }
 }
 
 dependencyManagement {
@@ -38,6 +45,13 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.cloud:spring-cloud-starter-eureka-server')
 	compile ('org.mongodb:mongodb-driver:3.2.2')
+//  for cloud config
+	compile('org.springframework.cloud:spring-cloud-starter-config')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+//	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.9.Final'
+	runtime("mysql:mysql-connector-java")
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 }
 
 bootRun {

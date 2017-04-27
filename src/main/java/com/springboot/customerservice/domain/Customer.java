@@ -1,13 +1,31 @@
 package com.springboot.customerservice.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by mvisionmacmini on 4/25/2017 AD.
  */
+@Entity
+@Table(name = "CUSTOMER")
 public class Customer {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "balance")
     private Double balance;
+
+    protected Customer(){
+
+    }
 
     public Customer(Long id, String firstName, String lastName, Double balance){
         this.id = id;

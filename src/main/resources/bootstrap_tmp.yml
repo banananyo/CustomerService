@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: customer-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+    retry:
+            initial-interval: 2000
+            max-attempts: 20
+            multiplier: 3
+management:
+  security:
+    enabled: false
+server:
+  port: 8088
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
+    registryFetchIntervalSeconds: 1
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://127.0.0.1:8761}/eureka/
+
+
+
