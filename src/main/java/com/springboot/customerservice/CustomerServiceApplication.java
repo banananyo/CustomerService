@@ -101,8 +101,16 @@ class MessageRestController {
 	@Value("${message:customer service default}")
 	private String message;
 
+	@Value("${server.port}")
+	private String serverPort;
+
 	@RequestMapping("/message")
 	String getMessage() {
 		return this.message;
 	}
+	@RequestMapping("/getPort")
+	String getPort(){
+		return this.serverPort;
+	}
 }
+
